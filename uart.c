@@ -45,17 +45,16 @@ void uart_puts(unsigned char *tx_message)
     while(1)
     {
     
-    if(message[i]==0) // If end of input string is reached, break loop. 
-    {
-       break;
-    }
+        if(message[i]==0) // If end of input string is reached, break loop. 
+        {
+           break;
+        }
     
-    message_num = (int)message[i]; //Cast string char into a int variable
-    UCA0TXBUF = message_num; // write INT to TX buffer
-    while(!(IFG2&UCA0TXIFG));    
-}
+        message_num = (int)message[i]; //Cast string char into a int variable
+        UCA0TXBUF = message_num; // write INT to TX buffer
+        while(!(IFG2&UCA0TXIFG));    
+    }
        
 } 
 
    
-} 

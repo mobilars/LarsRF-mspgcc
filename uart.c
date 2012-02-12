@@ -27,15 +27,14 @@ void uartInit(void)
  
 } 
 
-void putchar(unsigned char c)
+void uart_putc(unsigned char c)
 {
     UCA0TXBUF = c; // write c to TX buffer
-    //__delay_cycles(10000); //transmission delay
     while(!(IFG2&UCA0TXIFG));
     return;
 }
 
-void putstring(unsigned char *tx_message)
+void uart_puts(unsigned char *tx_message)
 {
 
     unsigned int i=0; //Define end of string loop int
@@ -53,13 +52,8 @@ void putstring(unsigned char *tx_message)
     
     message_num = (int)message[i]; //Cast string char into a int variable
     UCA0TXBUF = message_num; // write INT to TX buffer
-    i++; // increase string index
-    __delay_cycles(10000); //transmission delay
-    if(i>50) //prevent infinite transmit
-    {
-      //P1OUT |= Error; 
-      break;   
-    }
+    while(!(IFG2&UCA0TXIFG));    
+}
        
 } 
 

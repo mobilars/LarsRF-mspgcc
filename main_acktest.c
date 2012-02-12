@@ -86,10 +86,9 @@ interrupt(PORT1_VECTOR) PORT1_ISR()
     txBuffer[11] = 0x40;
     
     // Using printf isn't very efficient, although if you configure your compiler,
-    // you can maybe use a tiny version of it. Also check out:
     // http://www.43oh.com/forum/viewtopic.php?f=10&t=1732&hilit=tiny+printf
     
-    smallprintf("TX PKT:%i\r\n", txBuffer[3]);// An example of what we want to show on serial
+    uart_printf("TX PKT:%i\r\n", txBuffer[3]);// An example of what we want to show on serial
           
     RFSendPacket(txBuffer, 12);              // Send value over RF
     __delay_cycles(5000);                   // Switch debounce
@@ -114,7 +113,7 @@ interrupt(PORT2_VECTOR) PORT2_ISR()
            
         if (rxBuffer[1] == 0xFF) 
         {
-          putstring("RX ACK\r\n");
+          uart_printf("RX ACK\r\n");
         }
         else 
         {
@@ -131,8 +130,8 @@ interrupt(PORT2_VECTOR) PORT2_ISR()
           txBuffer[3] = 0x00;
 
           RFSendPacket(txBuffer, 4);              // Send value over RF
-          smallprintf("RX PKT:%i\r\n", rxBuffer[2]);// An example of what we want to show on serial
-          putstring("TX ACK\r\n"); // Similar to printf, but printf probably takes longer
+          uart_printf("RX PKT:%i\r\n", rxBuffer[2]);// An example of what we want to show on serial
+          uart_printf("TX ACK\r\n"); // Similar to printf, but printf probably takes longer
         }
         
      }

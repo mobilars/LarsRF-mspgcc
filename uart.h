@@ -1,4 +1,4 @@
 
-void putc(unsigned char c);
+void putchar(unsigned char c);
 void uartInit(void);
-void puts(unsigned char *tx_message);
+void putstring(unsigned char *tx_message);

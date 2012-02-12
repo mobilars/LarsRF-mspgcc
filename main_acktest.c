@@ -22,7 +22,6 @@ char txBuffer[12];
 char rxBuffer[12];
 unsigned int i = 0;
 
-//int puts(const char *) { while(*s) putc(*s++); }
 
 
 
@@ -115,7 +114,7 @@ interrupt(PORT2_VECTOR) PORT2_ISR()
            
         if (rxBuffer[1] == 0xFF) 
         {
-          puts("RX ACK\r\n");
+          putstring("RX ACK\r\n");
         }
         else 
         {
@@ -133,7 +132,7 @@ interrupt(PORT2_VECTOR) PORT2_ISR()
 
           RFSendPacket(txBuffer, 4);              // Send value over RF
           smallprintf("RX PKT:%i\r\n", rxBuffer[2]);// An example of what we want to show on serial
-          puts("TX ACK\r\n"); // Similar to printf, but printf probably takes longer
+          putstring("TX ACK\r\n"); // Similar to printf, but printf probably takes longer
         }
         
      }
